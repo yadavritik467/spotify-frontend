@@ -3,17 +3,16 @@ import Footer from '../components/Footer';
 import BottomCTA from '../components/BottomCTA';
 import CategoryCard from '../components/CategoryCard';
 import { useEffect } from 'react';
-import { FollowAndVisiters, User } from '../redux/reducers/authReducer';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
+import { FollowAndVisiters } from '../redux/reducers/authReducer';
+import { useAppDispatch, useAppSelector } from '../redux/store';
 import { loadAllUserApi } from '../redux/actions/authAction';
 import { DotsLoader } from '../components/loaders/DotsLoader';
 
 
 export default function SearchPage() {
-    const { allUsers, loading }: { allUsers: FollowAndVisiters[], loading: boolean } = useSelector((state: RootState) => state.auth)
-    const { searchQuery, limit, page }: { searchQuery: string, limit: number, page: number } = useSelector((state: RootState) => state.filter)
-    const dispatch = useDispatch()
+    const { allUsers, loading }: { allUsers: FollowAndVisiters[], loading: boolean } = useAppSelector((state) => state.auth)
+    const { searchQuery, limit, page }: { searchQuery: string, limit: number, page: number } = useAppSelector((state) => state.filter)
+    const dispatch = useAppDispatch()
     useEffect(() => {
         if (!allUsers.length) dispatch(loadAllUserApi(searchQuery, limit, page))
     }, [dispatch, allUsers.length, searchQuery, limit, page])

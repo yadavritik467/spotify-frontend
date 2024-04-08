@@ -1,8 +1,7 @@
-import { useDispatch } from 'react-redux';
 import Navbar from '../components/Navbar';
 import { FormEvent, useEffect, useState } from 'react';
 import { signUpApi } from '../redux/actions/authAction';
-import { token } from '../redux/store';
+import { token, useAppDispatch } from '../redux/store';
 import { useNavigate } from 'react-router-dom';
 
 export default function SignupPage() {
@@ -12,7 +11,7 @@ export default function SignupPage() {
     const [password, setPassword] = useState<string>('')
     const [confirmPassword, setConfirmPassword] = useState<string>('')
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -29,13 +28,9 @@ export default function SignupPage() {
     return (
         <>
             <div className='w-full bg-black text-gray-50 min-h-[calc(100vh-50px)] xm:min-h-screen '>
-
-
                 <div className="relative  flex flex-wrap">
-
                     <div className='p-2 min-h-screen w-full '>
-                        <Navbar page="login" />
-
+                        <Navbar />
                         <div className='w-full p-2.5 flex justify-center'>
                             <div className="max-w-96">
                                 <h3 className='my-2.5 text-2xl font-bold'>Signup, and Feel Smoothie</h3>
@@ -48,7 +43,6 @@ export default function SignupPage() {
                                         <label htmlFor="" className='text-sm font-semibold mb-2'>Last Name</label>
                                         <input required onChange={(e) => setLastName(e.target.value)} type="text" className='block w-full bg-transparent p-2.5 rounded-md border ' placeholder='Raghuwansi Ram' />
                                     </div>
-
                                     <div className='mb-2.5'>
                                         <label htmlFor="" className='text-sm font-semibold mb-2'>Email</label>
                                         <input required onChange={(e) => setEmail(e.target.value)} type="email" className='block w-full bg-transparent p-2.5 rounded-md border ' placeholder='name@domain.com' />

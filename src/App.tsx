@@ -4,9 +4,8 @@ import SearchPage from "./pages/SearchPage"
 import LoginPage from "./pages/LoginPage"
 import SignupPage from "./pages/SignupPage"
 import { useEffect } from "react"
-import { useDispatch, useSelector, } from "react-redux"
 import { loadUserApi } from "./redux/actions/authAction"
-import { RootState, } from "./redux/store"
+import { useAppDispatch, useAppSelector, } from "./redux/store"
 import SingleUser from "./pages/singleUser"
 import { ToastContainer } from "react-toastify"
 import FollowingPage from "./pages/FollowingPage"
@@ -16,18 +15,14 @@ import SongPage from "./pages/SongPage"
 import MyProfile from "./pages/MyProfile"
 
 function App() {
-  const dispatch = useDispatch()
-  const { token }: { token: string } = useSelector((state: RootState) => state.auth)
+  const dispatch = useAppDispatch()
+  const { token }: { token: string } = useAppSelector((state) => state.auth)
 
   useEffect(() => {
     if (token) {
       dispatch(loadUserApi())
     }
   }, [dispatch, token])
-
-
-
-
 
   return (
     <>

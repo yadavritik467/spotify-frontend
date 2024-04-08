@@ -1,19 +1,17 @@
-import { Link } from "react-router-dom"
 import SectionTitle from "../components/SectionTitle"
 import Footer from "../components/Footer"
-import { useDispatch, useSelector } from "react-redux"
-import { RootState } from "../redux/store"
+import { useAppDispatch, useAppSelector } from "../redux/store"
 import { useEffect, useState } from "react"
 import { Song } from "../redux/reducers/songReducer"
 import { allSongApi, listenSongApi } from "../redux/actions/songAction"
 import { DotsLoader } from "../components/loaders/DotsLoader"
 
 export default function SongPage() {
-    const { searchQuery, limit, page }: { searchQuery: string, limit: number, page: number } = useSelector((state: RootState) => state.filter)
-    const { allSongs, loading }: { allSongs: Song[], loading: boolean } = useSelector((state: RootState) => state.song)
+    const { searchQuery, limit, page }: { searchQuery: string, limit: number, page: number } = useAppSelector((state) => state.filter)
+    const { allSongs, loading }: { allSongs: Song[], loading: boolean } = useAppSelector((state) => state.song)
     const [songUrl, setSongUrl] = useState<string>('')
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     useEffect(() => {
         if (!allSongs.length) {
             dispatch(allSongApi(searchQuery, limit, page))
@@ -22,8 +20,10 @@ export default function SongPage() {
 
     const clickOnSingleSong = async (song: Song) => {
         setSongUrl(song?.songs.url ? song?.songs?.url : '')
-        await dispatch(listenSongApi(song?._id))
-        await dispatch(allSongApi())
+        if (song?._id) {
+            dispatch(listenSongApi(song._id))
+        }
+        await dispatch(allSongApi(searchQuery, limit, page))
     }
 
     const transFormCharacter = (songName: string) => {

@@ -33,7 +33,7 @@ export const listenSongApi =
   (id: string) =>
   async (
     dispatch: (arg0: {
-      payload: Song | undefined;
+      payload: string | undefined;
       type:
         | "song/listenSongStart"
         | "song/listenSongSuccess"

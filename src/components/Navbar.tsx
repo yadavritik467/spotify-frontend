@@ -1,19 +1,18 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { User, logOutSuccess } from "../redux/reducers/authReducer";
-import { RootState } from "../redux/store";
+import { useAppDispatch, useAppSelector } from "../redux/store";
 import { loadAllUserApi } from "../redux/actions/authAction";
 import { filterStart } from "../redux/reducers/searchReducer";
 import SearchBar from "../utils/searchBar";
 import { allSongApi } from "../redux/actions/songAction";
 
 
-export default function Navbar(props: any) {
+export default function Navbar() {
 
-  const { isAuthenticated, user, token }: { isAuthenticated: boolean, user: User | null, token: string } = useSelector((state: RootState) => state.auth)
-  const { searchQuery, limit, page }: { searchQuery: string, limit: number, page: number } = useSelector((state: RootState) => state.filter)
-  const dispatch = useDispatch();
+  const { isAuthenticated, user, token }: { isAuthenticated: boolean, user: User | null, token: string } = useAppSelector((state) => state.auth)
+  const { searchQuery, limit, page }: { searchQuery: string, limit: number, page: number } = useAppSelector((state) => state.filter)
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation()
 
@@ -55,8 +54,7 @@ export default function Navbar(props: any) {
 
   return (
     <>
-
-      <div className={`w-full overflow-x-hidden sticky z-10 ${props.page === 'search' ? 'flex' : 'hidden'} lg:flex top-0  items-center justify-between px-2 py-2 bg-[#000000]`}>
+      <div className={`w-full overflow-x-hidden fixed z-10  lg:flex top-0  items-center justify-between px-2 py-2 bg-[#000000]`}>
         <div className={`w-full lg:w-fit flex items-center justify-between gap-2`}>
           {
             location.pathname === '/song' && <SearchBar
@@ -75,7 +73,7 @@ export default function Navbar(props: any) {
 
         <div className="hidden lg:flex items-center gap-5 ">
           {isAuthenticated ? <>
-            <Link  to={`/my-profile`}>
+            <Link to={`/my-profile`}>
               <p className="py-2 text-[15px] opacity-50">Hello, {user?.firstName && user?.firstName}</p>
             </Link>
             <div onClick={logoutHandler} >

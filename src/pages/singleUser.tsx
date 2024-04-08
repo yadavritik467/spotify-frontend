@@ -1,19 +1,17 @@
-import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { loadSingleUserApi } from '../redux/actions/authAction';
+import { useAppDispatch } from '../redux/store';
 
 export default function SingleUser() {
 
     const { id } = useParams<{ id: string }>()
-    const dispatch = useDispatch()
-
+    const dispatch = useAppDispatch()
     useEffect(() => {
-        dispatch(loadSingleUserApi(id))
-    }, [dispatch])
-
-
-
+        if (id) {
+            dispatch(loadSingleUserApi(id))
+        }
+    }, [dispatch,id])
 
     return (
         <>

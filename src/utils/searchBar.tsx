@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEvent } from "react";
+import { ChangeEvent } from "react";
 
 type SearchFunction = (query: string) => void;
 type onKeyPress = (query: string) => void;
