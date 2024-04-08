@@ -16,6 +16,12 @@ export default function HomePage() {
             navigate('/login')
         }
     }, [navigate])
+    useEffect(() => {
+       
+        if (location.pathname === "/") {
+            navigate('/song')
+        }
+    }, [navigate])
 
     return (
         <>
