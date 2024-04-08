@@ -24,10 +24,7 @@ export default function HomePage() {
                     <Sidebar active="home" />
                     <div className='p-2 min-h-screen w-full lg:w-[80%] lg:ml-[20%]'>
                         <Navbar />
-                        <div className='pt-12'>
-
-                            <Outlet />
-                        </div>
+                        <Outlet />
                     </div>
                 </div>
                 <BottomCTA />

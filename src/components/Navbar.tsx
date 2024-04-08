@@ -54,7 +54,7 @@ export default function Navbar() {
 
   return (
     <>
-      <div className={`w-full overflow-x-hidden fixed z-10  lg:flex top-0  items-center justify-between px-2 py-2 bg-[#000000]`}>
+      <div className={`w-full overflow-x-hidden sticky z-10  lg:flex top-0  items-center justify-between px-2 py-2 bg-[#000000]`}>
         <div className={`w-full lg:w-fit flex items-center justify-between gap-2`}>
           {
             location.pathname === '/song' && <SearchBar
